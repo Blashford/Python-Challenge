@@ -17,16 +17,21 @@ with open(csvpath) as csvfile:
     average = avg
     increase = [0,0]
     decrease = [0,0]
-
+    first = True
     for row in csvreader:
         # incrementing the month and total
         month = month + 1
         total = total + int(row[1])
         # ask about average in office hours
-        if avg == 0:
+        if first == True:
+            # storing the first row
             avg = int(row[1])
+            first = False
         else:
-            average = average + (avg - int(row[1]))
+            # storing the total amount of change in average by subtracting 
+            # the previous row from the current row
+            average = average + (int(row[1]) - avg)
+            # storing the current row
             avg = int(row[1])
         # These output different totals than the one in the example, but I looked
         # at the data so the numbers must have been switched around? The months
@@ -45,7 +50,7 @@ with open(csvpath) as csvfile:
         
 # the average that I got is also different from the example, but the total is the same??
 
-average1 = average / month 
+average1 = average / (month - 1)
 average1 = round(average1, 2)    
 print("Financial Analysis")
 print("______________________")
