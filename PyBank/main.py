@@ -14,7 +14,7 @@ with open(csvpath) as csvfile:
     month = 0
     total = 0
     avg = 0
-    average =[]
+    average = avg
     increase = [0,0]
     decrease = [0,0]
 
@@ -26,8 +26,7 @@ with open(csvpath) as csvfile:
         if avg == 0:
             avg = int(row[1])
         else:
-            avg = avg + int(row[1])
-            average.append(avg)
+            average = average + (avg - int(row[1]))
             avg = int(row[1])
         # These output different totals than the one in the example, but I looked
         # at the data so the numbers must have been switched around? The months
@@ -43,12 +42,11 @@ with open(csvpath) as csvfile:
             decrease.append(row[0])
             decrease.append(row[1])
         
-avg = 0        
+        
 # the average that I got is also different from the example, but the total is the same??
-for num in average:
-    avg = avg + num
-average1 = avg / month 
-average1 = round(avg, 2)    
+
+average1 = average / month 
+average1 = round(average1, 2)    
 print("Financial Analysis")
 print("______________________")
 print(f"Total Months: {month}")
