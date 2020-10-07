@@ -22,7 +22,7 @@ with open(csvpath) as csvfile:
         # incrementing the month and total
         month = month + 1
         total = total + int(row[1])
-        # ask about average in office hours
+        
         if first == True:
             # storing the first row
             avg = int(row[1])
@@ -48,8 +48,8 @@ with open(csvpath) as csvfile:
             decrease.append(row[1])
         
         
-# the average that I got is also different from the example, but the total is the same??
 
+#  doing month - 1 because there is 1 less change than the number of months
 average1 = average / (month - 1)
 average1 = round(average1, 2)    
 print("Financial Analysis")
