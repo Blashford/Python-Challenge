@@ -15,7 +15,7 @@ with open(csvpath) as csvfile:
     li = 0
     otooley = 0
     total = 0
-    perc = 0
+    
 
     for row in csvreader:
         total = total + 1
@@ -29,31 +29,27 @@ with open(csvpath) as csvfile:
         elif row[2] == "O'Tooley":
             otooley = otooley + 1
 
-    perc = (khan / total) * 100
-    perc = round(perc, 3)
-    lk = ["Khan"]
-    lk.append(perc)
-    lk.append(khan)
-    
-    lc = ["Correy"]
-    perc = (correy / total) * 100
-    perc = round(perc, 3)
-    lc.append(perc)
-    lc.append(correy)
+    perck = 0
+    percc = 0
+    percl = 0
+    perco = 0
+   
+    perck = (khan / total) * 100
+    perck = round(perck, 3)
+    percc = (correy / total) * 100
+    percc = round(percc, 3)
+    percl = (li / total) * 100
+    percl = round(percl, 3)
+    perco = (otooley / total) * 100
+    perco = round(perco, 3)
 
-    ll = ["Li"]
-    perc = (li / total) * 100
-    perc = round(perc, 3)
-    ll.append(perc)
-    ll.append(li)
+    candidatevotes = {
+        "khan": ["Khan", perck, khan],
+        "correy": ["Correy", percc, correy],
+        "li": ["Li", percl, li],
+        "otooley": ["O'Tooley", perco, otooley]
+    }
     
-    lo = ["O'Tooley"]
-    perc = (otooley / total) * 100
-    perc = round(perc, 3)
-    lo.append(perc)
-    lo.append(otooley)
-
-    winlist = [otooley, khan, li, correy]
-    winlist.sort(reverse= True)
-    winner = winlist[0]
-    print(winlist)
+    sorted(candidatevotes.items(), key=lambda e: e[1][1], reverse= True)
+    
+  
