@@ -29,27 +29,35 @@ with open(csvpath) as csvfile:
         elif row[2] == "O'Tooley":
             otooley = otooley + 1
 
-    perck = 0
-    percc = 0
-    percl = 0
-    perco = 0
-   
-    perck = (khan / total) * 100
-    perck = round(perck, 3)
-    percc = (correy / total) * 100
-    percc = round(percc, 3)
-    percl = (li / total) * 100
-    percl = round(percl, 3)
-    perco = (otooley / total) * 100
-    perco = round(perco, 3)
+perck = 0
+percc = 0
+percl = 0
+perco = 0
 
-    candidatevotes = {
-        "khan": ["Khan", perck, khan],
-        "correy": ["Correy", percc, correy],
-        "li": ["Li", percl, li],
-        "otooley": ["O'Tooley", perco, otooley]
-    }
+perck = (khan / total) * 100
+perck = round(perck, 3)
+percc = (correy / total) * 100
+percc = round(percc, 3)
+percl = (li / total) * 100
+percl = round(percl, 3)
+perco = (otooley / total) * 100
+perco = round(perco, 3)
+
+candidatevotes = {
+    "khan": ["Khan", perck, khan],
+    "otooley": ["O'Tooley", perco, otooley],
+    "correy": ["Correy", percc, correy],
+    "li": ["Li", percl, li]
     
-    sorted(candidatevotes.items(), key=lambda e: e[1][1], reverse= True)
-    
-  
+}
+
+sorted(candidatevotes.items(), key=lambda e: e[1][1], reverse= True)
+print(candidatevotes)
+
+print(f'Election Results')
+print('--------------------------')
+print(f'Total Votes: {total}')
+print('----------------------------------')
+for candidate, percent, votes in candidatevotes.values():
+    print(f'{candidate}: {percent}% ({votes})')
+print('------------------------')
