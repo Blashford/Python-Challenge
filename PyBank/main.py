@@ -17,6 +17,7 @@ with open(csvpath) as csvfile:
     average = avg
     increase = [0,0]
     decrease = [0,0]
+    crease = 0
     first = True
     for row in csvreader:
         # incrementing the month and total
@@ -31,21 +32,19 @@ with open(csvpath) as csvfile:
             # storing the total amount of change in average by subtracting 
             # the previous row from the current row
             average = average + (int(row[1]) - avg)
+            crease = int(row[1]) - avg
+            if int(increase[1]) < crease:
+                increase.pop(1)
+                increase.pop(0)
+                increase.append(row[0])
+                increase.append(crease)
+            if int(decrease[1]) > crease:
+                decrease.pop(1)
+                decrease.pop(0)
+                decrease.append(row[0])
+                decrease.append(crease)
             # storing the current row
             avg = int(row[1])
-        # These output different totals than the one in the example, but I looked
-        # at the data so the numbers must have been switched around? The months
-        # are the same though
-        if int(increase[1]) < int(row[1]):
-            increase.pop(1)
-            increase.pop(0)
-            increase.append(row[0])
-            increase.append(row[1])
-        if int(decrease[1]) > int(row[1]):
-            decrease.pop(1)
-            decrease.pop(0)
-            decrease.append(row[0])
-            decrease.append(row[1])
         
         
 
@@ -57,7 +56,7 @@ print("______________________")
 print(f"Total Months: {month}")
 print(f"Total: ${total}")
 print(f"Average Change: ${average1}")
-print(f"Greatest Increase in Profits: {increase[0]} ${increase[1]}")
-print(f"Greatest Decrease in Profits: {decrease[0]} ${decrease[1]}")
+print(f"Greatest Increase in Profits: {increase[0]} (${increase[1]})")
+print(f"Greatest Decrease in Profits: {decrease[0]} (${decrease[1]})")
 
     
