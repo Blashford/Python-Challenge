@@ -55,11 +55,11 @@ perco = (otooley / total) * 100
 perco = round(perco, 3)
 
 # storing everything together
-candidatevotes = {
-    "otooley": ["O'Tooley", perco, otooley],
+candidatevotes = {  
     "khan": ["Khan", perck, khan],
     "correy": ["Correy", percc, correy],
-    "li": ["Li", percl, li]      
+    "li": ["Li", percl, li],
+    "otooley": ["O'Tooley", perco, otooley]      
 }
 # iterating through the dictionary to find the winners name
 for key, value in candidatevotes.items():
@@ -67,7 +67,7 @@ for key, value in candidatevotes.items():
         win.append(value[0])
 
 
-
+# Printing results
 print(f'Election Results')
 print('--------------------------')
 print(f'Total Votes: {total}')
@@ -76,3 +76,15 @@ for candidate, percent, votes in candidatevotes.values():
     print(f'{candidate}: {percent}% ({votes})')
 print('------------------------')
 print(f"Winner: {win[1]}")
+
+# Output path to txt file
+output_path = os.path.join("Analysis", "Analysis.txt")
+
+# writing to analysis txt file
+f= open(output_path, "w")
+f.write("Election Results")
+f.write("\n----------------------")
+for candidate, percent, votes in candidatevotes.values():
+    f.write(f'\n{candidate}: {percent}% ({votes})')
+f.write("\n----------------------")
+f.write(f"\nWinner: {win[1]}")

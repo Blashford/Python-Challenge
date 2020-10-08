@@ -32,6 +32,8 @@ with open(csvpath) as csvfile:
             # storing the total amount of change in average by subtracting 
             # the previous row from the current row
             average = average + (int(row[1]) - avg)
+            # finding the greatest increase and decrease by storing the current change
+            # and putting it up against what was already stored, and replacing, if necessary
             crease = int(row[1]) - avg
             if int(increase[1]) < crease:
                 increase.pop(1)
@@ -58,5 +60,18 @@ print(f"Total: ${total}")
 print(f"Average Change: ${average1}")
 print(f"Greatest Increase in Profits: {increase[0]} (${increase[1]})")
 print(f"Greatest Decrease in Profits: {decrease[0]} (${decrease[1]})")
+
+# Making output path for the txt
+output_path = os.path.join("Analysis", "Analysis.txt")
+
+# writing to the txt
+f = open(output_path, "w")
+f.write("Financial Analysis \n")
+f.write("______________________\n")
+f.write(f"Total Months: {month}\n")
+f.write(f"Total: ${total}\n")
+f.write(f"Average Change: ${average1}\n")
+f.write(f"Greatest Increase in Profits: {increase[0]} (${increase[1]})\n")
+f.write(f"Greatest Decrease in Profits: {decrease[0]} (${decrease[1]})")
 
     
