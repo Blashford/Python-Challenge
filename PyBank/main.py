@@ -51,13 +51,13 @@ with open(csvpath) as csvfile:
         
 
 #  doing month - 1 because there is 1 less change than the number of months
-average1 = average / (month - 1)
-average1 = round(average1, 2)    
+average = average / (month - 1)
+average = round(average, 2)    
 print("Financial Analysis")
 print("______________________")
 print(f"Total Months: {month}")
 print(f"Total: ${total}")
-print(f"Average Change: ${average1}")
+print(f"Average Change: ${average}")
 print(f"Greatest Increase in Profits: {increase[0]} (${increase[1]})")
 print(f"Greatest Decrease in Profits: {decrease[0]} (${decrease[1]})")
 
@@ -70,7 +70,7 @@ f.write("Financial Analysis \n")
 f.write("______________________\n")
 f.write(f"Total Months: {month}\n")
 f.write(f"Total: ${total}\n")
-f.write(f"Average Change: ${average1}\n")
+f.write(f"Average Change: ${average}\n")
 f.write(f"Greatest Increase in Profits: {increase[0]} (${increase[1]})\n")
 f.write(f"Greatest Decrease in Profits: {decrease[0]} (${decrease[1]})")
 
