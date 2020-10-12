@@ -38,7 +38,6 @@ for candidate, key1 in dicty.items():
             win.append(votes)
             win.append(candidate)
         percent = (votes / total) * 100
-        percent = round(percent, 3)
         dicty[candidate].update({"Percent":percent})
         
         break
@@ -51,7 +50,7 @@ print('--------------------------')
 print(f'Total Votes: {total}')
 print('----------------------------------')
 for candidate, votes in dicty.items():
-    print(f'{candidate}: {dicty[candidate]["Percent"]}% ({dicty[candidate]["Votes"]})')
+    print(f'{candidate}: {dicty[candidate]["Percent"]:.3f}% ({dicty[candidate]["Votes"]})')
 print('------------------------')
 print(f"Winner: {win[1]}")
 
@@ -63,6 +62,6 @@ f= open(output_path, "w")
 f.write("Election Results")
 f.write("\n----------------------")
 for candidate, votes in dicty.items():
-    f.write(f'\n{candidate}: {dicty[candidate]["Percent"]}% ({dicty[candidate]["Votes"]})')
+    f.write(f'\n{candidate}: {dicty[candidate]["Percent"]:.3f}% ({dicty[candidate]["Votes"]})')
 f.write("\n----------------------")
 f.write(f"\nWinner: {win[1]}")
