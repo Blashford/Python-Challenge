@@ -10,61 +10,39 @@ with open(csvpath) as csvfile:
     csvreader = csv.reader(csvfile, delimiter=',')
     csvheader = next(csvreader)
 
-    # Tracking the votes
-    khan = 0
-    correy = 0
-    li = 0
-    otooley = 0
+    # Tracking the total votes and making an empty dictionary to hold candidates and votes 
     total = 0
+    dicty = {}
     
     # Iterating through the reader and incrementing total votes
     for row in csvreader:
         total = total + 1
+        # Finding each unique candidate and incrementing their votes in the dictionary
+        if row[2] not in dicty:
+            dicty.update({row[2]:{
+                    "Votes": 1
+            }})
+        else:
+            dicty[row[2]]["Votes"] += 1
+        
+# empty list to find who has the most votes
+win= [0,0]
 
-        # Counting votes for each candidate
-        if row[2] == "Khan":
-            khan = khan + 1
-        elif row[2] == "Correy":
-            correy = correy + 1
-        elif row[2] == "Li":
-            li = li + 1
-        elif row[2] == "O'Tooley":
-            otooley = otooley + 1
-
-# finding who had the most votes
-win= [0]
-can = [correy, li, otooley, khan]
-for name in can:
-    if name > win[0]:
-        win.pop()
-        win.append(name)
-
-# Tracking the percentage of each vote
-perck = 0
-percc = 0
-percl = 0
-perco = 0
-# finding the percentage of each vote
-perck = (khan / total) * 100
-perck = round(perck, 3)
-percc = (correy / total) * 100
-percc = round(percc, 3)
-percl = (li / total) * 100
-percl = round(percl, 3)
-perco = (otooley / total) * 100
-perco = round(perco, 3)
-
-# storing everything together
-candidatevotes = {  
-    "khan": ["Khan", perck, khan],
-    "correy": ["Correy", percc, correy],
-    "li": ["Li", percl, li],
-    "otooley": ["O'Tooley", perco, otooley]      
-}
-# iterating through the dictionary to find the winners name
-for key, value in candidatevotes.items():
-    if value[2] == win[0]:
-        win.append(value[0])
+# iterating through the dictionary to find who has the most votes, and also calculating 
+# what percentage of votes each candidate got 
+for candidate, key1 in dicty.items():
+    for key, votes in dicty[candidate].items():
+        if votes > win[0]:
+            win.pop()
+            win.pop()
+            win.append(votes)
+            win.append(candidate)
+        percent = (votes / total) * 100
+        percent = round(percent, 3)
+        dicty[candidate].update({"Percent":percent})
+        
+        break
+    continue
 
 
 # Printing results
@@ -72,8 +50,8 @@ print(f'Election Results')
 print('--------------------------')
 print(f'Total Votes: {total}')
 print('----------------------------------')
-for candidate, percent, votes in candidatevotes.values():
-    print(f'{candidate}: {percent}% ({votes})')
+for candidate, votes in dicty.items():
+    print(f'{candidate}: {dicty[candidate]["Percent"]}% ({dicty[candidate]["Votes"]})')
 print('------------------------')
 print(f"Winner: {win[1]}")
 
@@ -84,7 +62,7 @@ output_path = os.path.join("Analysis", "Analysis.txt")
 f= open(output_path, "w")
 f.write("Election Results")
 f.write("\n----------------------")
-for candidate, percent, votes in candidatevotes.values():
-    f.write(f'\n{candidate}: {percent}% ({votes})')
+for candidate, votes in dicty.items():
+    f.write(f'\n{candidate}: {dicty[candidate]["Percent"]}% ({dicty[candidate]["Votes"]})')
 f.write("\n----------------------")
 f.write(f"\nWinner: {win[1]}")
