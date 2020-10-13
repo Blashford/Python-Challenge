@@ -1,5 +1,6 @@
 # Python-Challenge
 Author: Blake Ashford
+
 Date: 10/12/2020
 
 PyBank is code run on financial profit and losses data to come up with the total amount of money, the average change, and the greatest increase and decrease in change over the course of the data.
